@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Sessions
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-list-header color="dark">
+                <ion-col>
+                    Title
+                </ion-col>
+                <ion-col>
+                    Description
+                </ion-col>
+                <ion-col>
+                    Presenters
+                </ion-col>
+                <ion-col>
+                    Duration
+                </ion-col>
+            </ion-list-header>
+        </ion-row>
+
+        <ion-row *ngFor="let session of sessions">
+            <ion-col>
+                {{session.title}}
+            </ion-col>
+            <ion-col>
+                {{session.description}}
+            </ion-col>
+            <ion-col>
+                {{session.presenters}}
+            </ion-col>
+            <ion-col>
+                {{session.duration}}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

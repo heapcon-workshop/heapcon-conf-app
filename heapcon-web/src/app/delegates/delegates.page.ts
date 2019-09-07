@@ -1,4 +1,6 @@
 import {Component, OnInit} from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import {Delegate} from "../models/delegate.model";
 
 @Component({
     selector: 'app-delegates',
@@ -6,16 +8,17 @@ import {Component, OnInit} from "@angular/core";
     styleUrls: ['delegates.page.scss']
 })
 export class DelegatesPage implements OnInit {
-    public delegates: Array<{ firstName: String; lastName: String; position: String }> = [];
+    public delegates: Array<Delegate> = [];
 
-    constructor() {
-        for (let i = 1; i < 20; i++) {
-            this.delegates.push({
-                firstName: `First name ${i}`,
-                lastName: ` with Last name ${i}`,
-                position: `Software Developer`
-            })
-        }
+    constructor(private httpClient: HttpClient) {
+        this.get_products();
+    }
+
+    get_products(){
+        this.httpClient.get<Delegate[]>("http://localhost:8080/attendees").subscribe((res) => {
+            console.log(res);
+            this.delegates = res;
+        })
     }
 
     ngOnInit() {

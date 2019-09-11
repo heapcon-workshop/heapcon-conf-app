@@ -1,0 +1,17 @@
+{{- if .Values.kymaGateway.enabled -}}
+{{- $fullName := include "helm-chart.fullname" . -}}
+apiVersion: gateway.kyma-project.io/v1alpha2
+kind: Api
+metadata:
+  labels:
+    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-web
+    chart: {{ include "helm-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-web
+spec:
+  hostname: {{ .Values.prefix }}-{{ .Values.kymaGateway.hostname }}-web
+  service:
+    name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-web
+    port: 80
+{{- end }}

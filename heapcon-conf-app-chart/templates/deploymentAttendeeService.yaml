@@ -1,0 +1,51 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-attendeeservice
+  labels:
+    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+    chart: {{ include "helm-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.attendeeService.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+        release: {{ .Release.Name }}
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.attendeeService.image}}"
+        imagePullPolicy: {{ .Values.pullPolicy }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.deployment.containerPort }}
+            protocol: TCP
+#        livenessProbe:
+#          httpGet:
+#            path: /status/alive
+#            port: {{ .Values.deployment.containerPort }}
+#          initialDelaySeconds: 10
+#          periodSeconds: 3
+        resources:
+{{ toYaml .Values.web.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

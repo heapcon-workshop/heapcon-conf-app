@@ -1,0 +1,51 @@
+namespace: playground
+prefix: test
+
+istio:
+  enabled: true
+
+web:
+  image: gcr.io/xxxl-services/heapcon-web:0.0.1
+  replicas: 1
+  resources:
+    requests:
+      memory: 256Mi
+attendeeService:
+  image: gcr.io/xxxl-services/heapcon-attendeeservice:0.0.1
+  replicas: 1
+  resources:
+    requests:
+      memory: 256Mi
+
+pullPolicy: Always
+
+#needed?
+nameOverride: "heapcon"
+fullnameOverride: "heapcon"
+
+deployment:
+  containerPort: 8080
+  readinessProbe: /actuator/health
+  livenessProbe: /actuator/health
+
+service:
+  type: ClusterIP
+  port: 8080
+
+kymaGateway:
+  enabled: true
+  hostname: heapcon
+
+ingress:
+  enabled: true
+  annotations: {}
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,4 +1,6 @@
 import {Component, OnInit} from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import {Session} from "../models/session.model";
 
 @Component({
     selector: 'app-sessions',
@@ -6,17 +8,16 @@ import {Component, OnInit} from "@angular/core";
     styleUrls: ['sessions.page.scss']
 })
 export class SessionsPage implements OnInit {
-    public sessions: Array<{title: String; presenters: Array<String>; description: String; duration: String}> = [];
+    public sessions: Array<Session> = [];
 
-    constructor() {
-        for (let i = 1; i < 20; i++) {
-            this.sessions.push({
-                title: `Session ${i}`,
-                presenters: [`Presenter ${i}`],
-                description: `Some fancy description ${i}`,
-                duration: `1h ${i}min`
-            })
-        }
+    constructor(private httpClient: HttpClient) {
+        this.get_sessions();
+    }
+
+    get_sessions(){
+        this.httpClient.get<Session[]>("http://localhost:3000/schedules").subscribe((res) => {
+            this.sessions = res;
+        })
     }
 
     ngOnInit() {

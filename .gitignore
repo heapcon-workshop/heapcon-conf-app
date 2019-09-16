@@ -23,6 +23,7 @@ coverage/
 www/
 dist/
 heapcon-web/node_modules/
+heapcon-schedules/node_modules/
 tmp/
 temp/
 platforms/

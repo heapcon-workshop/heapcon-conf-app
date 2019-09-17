@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'net.msgnetconomy.demo'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '1.8'
 
 apply plugin: 'com.palantir.docker'
@@ -22,7 +22,7 @@ task unpack(type: Copy) {
 	into("build/dependency")
 }
 docker {
-	name "bpanic/${bootJar.baseName}:${project.version}"
+	name "bdjordjevic/${bootJar.baseName}:${project.version}"
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }

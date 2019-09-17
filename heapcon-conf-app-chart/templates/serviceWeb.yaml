@@ -12,9 +12,9 @@ metadata:
     auth.istio.io/8080: NONE
     {{- end }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.web.type }}
   ports:
-    - port: 80
+    - port: {{ .Values.web.port }}
       targetPort: http
       protocol: TCP
       name: http

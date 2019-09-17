@@ -1,33 +1,33 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-attendeeservice
+  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-schedulerservice
   labels:
-    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-schedulerservice
     chart: {{ include "helm-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.attendeeService.replicas }}
+  replicas: {{ .Values.schedulerService.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+      app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-schedulerservice
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-attendeeservice
+        app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-schedulerservice
         release: {{ .Release.Name }}
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: "{{ .Values.attendeeService.image}}"
+        image: "{{ .Values.schedulerService.image}}"
         imagePullPolicy: {{ .Values.pullPolicy }}
         ports:
           - name: http
-            containerPort: {{ .Values.deployment.attendeeService.containerPort }}
+            containerPort: {{ .Values.deployment.schedulerService.containerPort }}
             protocol: TCP
 #        livenessProbe:
 #          httpGet:

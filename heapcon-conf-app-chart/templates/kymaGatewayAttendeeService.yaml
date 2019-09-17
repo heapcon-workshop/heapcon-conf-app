@@ -13,5 +13,5 @@ spec:
   hostname: {{ .Values.prefix }}-{{ .Values.kymaGateway.hostname }}-attendeeservice
   service:
     name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-attendeeservice
-    port: {{ .Values.service.port }}
+    port: {{ .Values.attendeeService.port }}
 {{- end }}

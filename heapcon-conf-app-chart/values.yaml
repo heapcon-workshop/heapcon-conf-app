@@ -5,14 +5,26 @@ istio:
   enabled: true
 
 web:
-  image: gcr.io/xxxl-services/heapcon-web:0.0.1
+  image: bdjordjevic/heapcon-web:0.0.1
+  type: ClusterIP
+  port: 80
   replicas: 1
   resources:
     requests:
       memory: 256Mi
 attendeeService:
-  image: gcr.io/xxxl-services/heapcon-attendeeservice:0.0.1
+  image: bdjordjevic/heapcon-attendeeservice:0.0.1
+  type: ClusterIP
+  port: 8080
   replicas: 1
+  resources:
+    requests:
+      memory: 256Mi
+schedulerService:
+  image: bdjordjevic/heapcon-schedulerservice:0.0.1
+  replicas: 1
+  type: ClusterIP
+  port: 3000
   resources:
     requests:
       memory: 256Mi
@@ -24,13 +36,12 @@ nameOverride: "heapcon"
 fullnameOverride: "heapcon"
 
 deployment:
-  containerPort: 8080
+  attendeeService:
+    containerPort: 8080
+  schedulerService:
+    containerPort: 3000
   readinessProbe: /actuator/health
   livenessProbe: /actuator/health
-
-service:
-  type: ClusterIP
-  port: 8080
 
 kymaGateway:
   enabled: true

@@ -5,7 +5,7 @@ istio:
   enabled: true
 
 web:
-  image: bdjordjevic/heapcon-web:0.0.1
+  image: bdjordjevic/heapcon-web:1.0.0
   type: ClusterIP
   port: 80
   replicas: 1
@@ -13,15 +13,15 @@ web:
     requests:
       memory: 256Mi
 attendeeService:
-  image: bdjordjevic/heapcon-attendeeservice:0.0.1
+  image: bdjordjevic/heapcon-attendeeservice:1.0.0
   type: ClusterIP
   port: 8080
   replicas: 1
   resources:
     requests:
       memory: 256Mi
-schedulerService:
-  image: bdjordjevic/heapcon-schedulerservice:0.0.1
+scheduleService:
+  image: bdjordjevic/heapcon-scheduleservice:1.0.0
   replicas: 1
   type: ClusterIP
   port: 3000
@@ -31,14 +31,13 @@ schedulerService:
 
 pullPolicy: Always
 
-#needed?
 nameOverride: "heapcon"
 fullnameOverride: "heapcon"
 
 deployment:
   attendeeService:
     containerPort: 8080
-  schedulerService:
+  scheduleService:
     containerPort: 3000
   readinessProbe: /actuator/health
   livenessProbe: /actuator/health

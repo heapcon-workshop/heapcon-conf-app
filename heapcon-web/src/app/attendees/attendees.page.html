@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Delegates
+      Attendees
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,15 +19,21 @@
         <ion-col>
           Last name
         </ion-col>
+        <ion-col>
+          Postal code
+        </ion-col>
       </ion-list-header>
     </ion-row>
 
-    <ion-row *ngFor="let delegate of delegates">
+    <ion-row *ngFor="let attendee of attendees">
       <ion-col>
-        {{delegate.firstName}}
+        {{attendee.firstName}}
       </ion-col>
       <ion-col>
-        {{delegate.lastName}}
+        {{attendee.lastName}}
+      </ion-col>
+      <ion-col>
+        {{attendee.postalCode}}
       </ion-col>
     </ion-row>
   </ion-grid>

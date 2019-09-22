@@ -17,8 +17,8 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Delegates',
-      url: '/delegates',
+      title: 'Attendees',
+      url: '/attendees',
       icon: 'contacts'
     },
     {

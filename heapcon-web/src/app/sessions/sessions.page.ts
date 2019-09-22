@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Session} from "../models/session.model";
 
 @Component({
@@ -14,8 +14,13 @@ export class SessionsPage implements OnInit {
         this.get_sessions();
     }
 
-    get_sessions(){
-        this.httpClient.get<Session[]>("http://localhost:3000/schedules").subscribe((res) => {
+    get_sessions() {
+        const currentLoc = window.location.href;
+        let prefix = currentLoc.match(/https:\/\/(.*)-heapcon-web(.*)/)[1];
+        let baseUrl = currentLoc.match(/web\.(.*).xip.io(.*)/)[1];
+
+        this.httpClient.get<Session[]>(
+            `https://${prefix}-heapcon-scheduleservice.${baseUrl}.xip.io/schedules`).subscribe((res) => {
             this.sessions = res;
         })
     }
@@ -23,4 +28,3 @@ export class SessionsPage implements OnInit {
     ngOnInit() {
     }
 }
-

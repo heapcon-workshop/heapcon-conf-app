@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-schedulerservice
+  name: {{ .Values.prefix }}-{{ include "helm-chart.fullname" . }}-scheduleservice
   labels:
-    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-schedulerservice
+    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-scheduleservice
     chart: {{ include "helm-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,12 +12,12 @@ metadata:
     auth.istio.io/3000: NONE
     {{- end }}
 spec:
-  type: {{ .Values.schedulerService.type }}
+  type: {{ .Values.scheduleService.type }}
   ports:
-    - port: {{ .Values.schedulerService.port }}
+    - port: {{ .Values.scheduleService.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-schedulerservice
+    app: {{ .Values.prefix }}-{{ include "helm-chart.name" . }}-scheduleservice
     release: {{ .Release.Name }}

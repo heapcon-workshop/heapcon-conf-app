@@ -22,7 +22,7 @@ task unpack(type: Copy) {
 	into("build/dependency")
 }
 docker {
-	name "bdjordjevic/${bootJar.baseName}:${project.version}"
+	name "${project.dockerUser}/${bootJar.baseName}:${project.version}"
 	copySpec.from(tasks.unpack.outputs).into("dependency")
 	buildArgs(['DEPENDENCY': "dependency"])
 }

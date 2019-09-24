@@ -1,8 +1,9 @@
 # Stage 1
 FROM node:alpine as ionic-build
-RUN npm install -g ionic
+RUN npm install -g ionic @angular/cli
 WORKDIR /app
 COPY . ./
+RUN npm install
 RUN ionic build --prod
 
 # Stage 2 - the production environment

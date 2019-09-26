@@ -10,7 +10,7 @@ Spring boot based microservices for serving a list of attendees
 
 ```
 cd heapcon-attendees
-./gradlew dockerPush -PdockerUser=[dockerHubUser]
+./gradlew dockerPush -PdockerUser=[docker-hub-account]
 ```
 
 ## heapcon-schedules ##

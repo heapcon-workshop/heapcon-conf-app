@@ -1,2 +1,2 @@
-rootProject.name = 'heapcon-attendees'
+rootProject.name = 'heapcon-attendeeservice'
 dockerUser = 'max4000'

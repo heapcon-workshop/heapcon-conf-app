@@ -2,7 +2,7 @@
 
 docker login
 
-## heapcon-attendees ##
+## heapcon-attendeeservice ##
 
 Spring boot based microservices for serving a list of attendees
 
@@ -13,7 +13,7 @@ cd heapcon-attendees
 ./gradlew dockerPush -PdockerUser=[docker-hub-account]
 ```
 
-## heapcon-schedules ##
+## heapcon-scheduleservice ##
 
 NodeJS based microservices for serving the schedule
 
@@ -21,8 +21,8 @@ NodeJS based microservices for serving the schedule
 
 ```
 cd heapcon-schedules
-docker build -f Dockerfile -t [docker-hub-account]/heapcon-schedules:1.0.0 .
-docker push [docker-hub-account]/heapcon-schedules:1.0.0
+docker build -f Dockerfile -t [docker-hub-account]/heapcon-scheduleservice:1.0.0 .
+docker push [docker-hub-account]/heapcon-scheduleservice:1.0.0
 ```
 
 ## heapcon-web ##
